@@ -1,0 +1,11 @@
+Description of the tests 
+
+ 
+
+In tests we focused on the biggest issue that we found, which is accessing extra meta-information in our dataset. We tested specifically whether the bot can access only 3 pieces of information: ‘id’, ‘sender_id’ and ‘content’, which we believe is sufficient information to perform operations. We also created an extra test that is reviewing whether one of the extra information - ‘full_name’ was included in the original message and thus could be leaked.  
+
+ 
+
+To correct this privacy issue, we altered the source code such that bot only receives 3 pieces of meta-information: sender id, id of the message and content of the message. All other meta-information was stored in a separate dictionary and can be accessed via a unique message id that is assigned to every message. Thus, when functionality is required, this information can be accessed by the server without giving bot any additional meta-information (for instance sending private messages to the user that sent the request). Information ‘sender_id’ is provided so that the bot can distinguish users without knowing who the sender was. Finally, ‘content’ is the content of the message that it should have access to.  
+
+ 
